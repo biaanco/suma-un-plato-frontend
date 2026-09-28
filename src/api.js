@@ -1,6 +1,7 @@
 import { usuarioActual } from './auth'
 
-const BASE = process.env.REACT_PUBLIC_API_URL || 'http://localhost:8080/api';
+const BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+
 
 async function pedir(ruta, opciones) {
   const headers = { 'Content-Type': 'application/json' }
