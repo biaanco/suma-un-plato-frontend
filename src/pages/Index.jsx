@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { get } from '../api'
 import { usuarioActual } from '../auth'
 import { cant } from '../format'
@@ -9,6 +9,7 @@ import Icono from '../components/Icono'
 
 export default function Index() {
   const usuario = usuarioActual()
+  const { hash, key } = useLocation()
   const [necesidades, setNecesidades] = useState([])
   const [stats, setStats] = useState({ kgMes: 0, merenderos: 0, entregas: 0 })
 
@@ -16,6 +17,12 @@ export default function Index() {
     get('/publico/necesidades').then(setNecesidades).catch(() => {})
     get('/publico/estadisticas').then(setStats).catch(() => {})
   }, [])
+
+  // Cuando se llega con #como o #necesidades (desde el menú), baja a esa sección
+  useEffect(() => {
+    if (!hash) return
+    document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: 'smooth' })
+  }, [hash, key])
 
   const pasos = [
     { icono: 'bag', titulo: 'Elegís qué donar', texto: 'Mirás las necesidades reales de hoy y armás tu aporte, como un carrito.' },
@@ -31,7 +38,7 @@ export default function Index() {
           <div className="hero-grid">
             <div className="reveal">
               <span className="chip chip-suave" style={{ marginBottom: 20 }}>Laboulaye · Comedores y merenderos</span>
-              <h1>Que lo que sobra en una casa llegue a la mesa de un comedor</h1>
+              <h1>Que la solidaridad de cada familia llegue a la mesa de quien más lo necesita.</h1>
               <p style={{ fontSize: 19, color: 'var(--tinta-suave)' }} className="medida">
                 Conectamos a los comedores y merenderos de Laboulaye con las personas que quieren ayudar.
                 Sin intermediarios confusos ni mensajes que se pierden: tu aporte se registra y llega a donde hace falta.
@@ -44,14 +51,7 @@ export default function Index() {
             <div className="hero-imagen reveal">
               <div className="hero-halo"></div>
               <div className="hero-foto">
-                <svg viewBox="0 0 400 300" style={{ width: '100%', display: 'block' }} role="img" aria-label="Olla comunitaria">
-                  <rect width="400" height="300" fill="#FBE7DA" />
-                  <ellipse cx="200" cy="250" rx="150" ry="24" fill="#F3D3BE" />
-                  <path d="M120 150h160l-14 90a16 16 0 0 1-16 14H150a16 16 0 0 1-16-14l-14-90z" fill="#E86A33" />
-                  <rect x="110" y="140" width="180" height="18" rx="9" fill="#CF561F" />
-                  <path d="M100 150h-14a10 10 0 0 1 0-20h14M300 150h14a10 10 0 0 0 0-20h-14" fill="none" stroke="#CF561F" strokeWidth="10" strokeLinecap="round" />
-                  <path d="M170 120c0-14 8-20 8-30M200 118c0-16 10-22 10-34M230 120c0-14 8-20 8-30" fill="none" stroke="#E1A02E" strokeWidth="5" strokeLinecap="round" opacity=".8" />
-                </svg>
+                <img src="/hero.jpg" alt="Voluntarios armando cajas con alimentos en un depósito" />
               </div>
             </div>
           </div>

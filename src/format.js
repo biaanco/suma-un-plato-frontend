@@ -36,8 +36,8 @@ export function claseSemaforo(clase) {
 }
 
 export function colorSemaforo(clase) {
-  if (clase === 'verde') return '#3E8E5A'
-  if (clase === 'ambar') return '#E1A02E'
-  if (clase === 'rojo') return '#C64632'
-  return '#6B635C'
+  if (clase === 'verde') return '#777777'
+  if (clase === 'ambar') return '#444444'
+  if (clase === 'rojo') return '#000000'
+  return '#555555'
 }

@@ -27,9 +27,9 @@ export default function MisDonaciones() {
   }
 
   function color(indice, actual) {
-    if (indice < actual) return '#3E8E5A'
-    if (indice === actual) return '#E86A33'
-    return '#EAE2D8'
+    if (indice < actual) return '#000000'
+    if (indice === actual) return '#777777'
+    return '#ffffff'
   }
 
   return (
@@ -72,9 +72,9 @@ export default function MisDonaciones() {
                               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5"><path d="M5 13l4 4L19 7" /></svg>
                             ) : (i + 1)}
                           </div>
-                          <span className="timeline-label" style={{ color: i <= actual ? (i < actual ? '#3E8E5A' : '#CF561F') : '#6B635C' }}>{LABELS[estado]}</span>
+                          <span className="timeline-label" style={{ color: i <= actual ? '#000000' : '#777777' }}>{LABELS[estado]}</span>
                         </div>
-                        {i < 3 && <div className="timeline-linea" style={{ background: i < actual ? '#3E8E5A' : '#EAE2D8' }}></div>}
+                        {i < 3 && <div className="timeline-linea" style={{ background: i < actual ? '#000000' : '#cccccc' }}></div>}
                       </div>
                     ))}
                   </div>

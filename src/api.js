@@ -1,10 +1,14 @@
+import { usuarioActual } from './auth'
+
 const BASE = 'http://localhost:8080/api'
 
 async function pedir(ruta, opciones) {
-  const respuesta = await fetch(BASE + ruta, {
-    headers: { 'Content-Type': 'application/json' },
-    ...opciones
-  })
+  const headers = { 'Content-Type': 'application/json' }
+  const usuario = usuarioActual()
+  if (usuario && usuario.token) {
+    headers['Authorization'] = 'Bearer ' + usuario.token
+  }
+  const respuesta = await fetch(BASE + ruta, { ...opciones, headers })
   let datos = null
   const texto = await respuesta.text()
   if (texto) {

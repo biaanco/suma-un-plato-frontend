@@ -5,9 +5,9 @@ import { cant } from '../format'
 import PanelLayout from '../components/PanelLayout'
 
 const URG = {
-  alta: { background: '#FBE3DE', color: '#C64632' },
-  media: { background: '#FBE7DA', color: '#CF561F' },
-  baja: { background: '#E4F0E7', color: '#3E8E5A' }
+  alta: { background: '#000000', color: '#ffffff' },
+  media: { background: '#bbbbbb', color: '#000000' },
+  baja: { background: '#ffffff', color: '#000000' }
 }
 const ESTADO = { pendiente: 'Pendiente', parcial: 'Parcial', cubierta: 'Cubierta' }
 

@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { usuarioActual, cerrarSesion, destinoPorRol } from '../auth'
-import Icono from './Icono'
 
 export default function Header() {
   const usuario = usuarioActual()
@@ -19,8 +18,7 @@ export default function Header() {
     <header className="header">
       <div className="contenedor header-inner">
         <Link to="/" className="logo">
-          <span style={{ color: 'var(--naranja)' }}><Icono nombre="cuchara" size={28} /></span>
-          <span className="logo-nombre">Suma un plato</span>
+          <img src="/logo.jpg" alt="Suma un plato Fundación" />
         </Link>
 
         <nav className="nav">

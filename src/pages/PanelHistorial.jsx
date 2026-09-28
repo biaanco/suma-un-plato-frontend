@@ -4,9 +4,9 @@ import { cant, fechaHora } from '../format'
 import PanelLayout from '../components/PanelLayout'
 
 const BADGE = {
-  ingreso: { background: '#E4F0E7', color: '#3E8E5A' },
-  ajuste: { background: '#FBE7DA', color: '#CF561F' },
-  egreso: { background: '#FBE3DE', color: '#C64632' }
+  ingreso: { background: '#ffffff', color: '#000000' },
+  ajuste: { background: '#bbbbbb', color: '#000000' },
+  egreso: { background: '#000000', color: '#ffffff' }
 }
 
 export default function PanelHistorial() {

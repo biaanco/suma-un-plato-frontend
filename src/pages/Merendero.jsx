@@ -1,17 +1,44 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { get, post, del } from '../api'
-import { usuarioActual } from '../auth'
+import { usuarioActual, cerrarSesion } from '../auth'
 import { cant, fecha } from '../format'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
 import Icono from '../components/Icono'
 
 const URG = {
-  alta: { background: '#FBE3DE', color: '#C64632' },
-  media: { background: '#FBE7DA', color: '#CF561F' },
-  baja: { background: '#E4F0E7', color: '#3E8E5A' }
+  alta: { background: '#000000', color: '#ffffff' },
+  media: { background: '#bbbbbb', color: '#000000' },
+  baja: { background: '#ffffff', color: '#000000' }
 }
+function Header() {
+  const navigate = useNavigate()
+  const usuario = usuarioActual()
+  function salir() {
+    cerrarSesion()
+    navigate('/')
+  }
+  return (
+    <header className="bn-header">
+      <div className="contenedor bn-header-inner">
+        <Link to="/merendero" className="bn-logo"><img src="/LogoSumaunplato.jpeg" alt="Suma un plato" /></Link>
+        <div className="bn-header-links">
+          {usuario && <span>Hola, {usuario.nombre}</span>}
+          <Link to="/">Ver sitio público</Link>
+          <button className="btn-fantasma" onClick={salir}>Cerrar sesión</button>
+        </div>
+      </div>
+    </header>
+  )
+}
+
+function Footer() {
+  return <footer className="bn-footer">Suma un plato · Perfil del merendero</footer>
+}
+
+function Marco({ children }) {
+  return <div className="bn">{children}</div>
+}
+
 const ESTADO = { pendiente: 'Pendiente', parcial: 'Parcial', cubierta: 'Cubierta' }
 
 export default function Merendero() {
@@ -46,11 +73,11 @@ export default function Merendero() {
   }
 
   if (noVinculado) {
-    return (<><Header /><main className="contenedor" style={{ padding: '64px 16px' }}><div className="tarjeta tarjeta-pad" style={{ textAlign: 'center', color: 'var(--tinta-suave)' }}>Tu cuenta todavía no está vinculada a un merendero activo. Contactá al coordinador.</div></main><Footer /></>)
+    return (<Marco><Header /><main className="contenedor" style={{ padding: '64px 16px' }}><div className="tarjeta tarjeta-pad" style={{ textAlign: 'center', color: 'var(--tinta-suave)' }}>Tu cuenta todavía no está vinculada a un merendero activo. Contactá al coordinador.</div></main><Footer /></Marco>)
   }
 
   if (!merendero) {
-    return (<><Header /><main className="contenedor" style={{ padding: '80px 16px', textAlign: 'center' }}><span className="cargando"></span></main><Footer /></>)
+    return (<Marco><Header /><main className="contenedor" style={{ padding: '80px 16px', textAlign: 'center' }}><span className="cargando"></span></main><Footer /></Marco>)
   }
 
   async function agregar(e) {
@@ -74,7 +101,7 @@ export default function Merendero() {
   }
 
   return (
-    <>
+    <Marco>
       <Header />
       <main className="contenedor" style={{ padding: '48px 16px' }}>
         <div style={{ marginBottom: 32 }}>
@@ -163,6 +190,6 @@ export default function Merendero() {
         </div>
       </main>
       <Footer />
-    </>
+    </Marco>
   )
 }
