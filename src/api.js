@@ -1,6 +1,6 @@
 import { usuarioActual } from './auth'
 
-const BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+const BASE = 'https://suma-un-plato-backend-docker.onrender.com/api'
 
 
 async function pedir(ruta, opciones) {
