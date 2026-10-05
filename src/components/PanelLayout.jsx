@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { usuarioActual, cerrarSesion } from '../auth'
 import { get } from '../api'
+import Icono from './Icono'
 
 const MENU = [
   { clave: 'dashboard', ruta: '/panel', texto: 'Dashboard', icono: 'grid' },
@@ -53,9 +54,8 @@ export default function PanelLayout({ titulo, seccion, children }) {
       {abierto && <div className="sidebar-backdrop" onClick={() => setAbierto(false)}></div>}
       <aside className={abierto ? 'sidebar abierto' : 'sidebar'}>
         <div className="sidebar-top">
-          <Link to="/panel" className="sidebar-logo">
-            <img src="/LogoSumaunplato.jpeg" alt="Suma un plato" />
-          </Link>
+          <span style={{ color: 'var(--naranja)' }}><Icono nombre="cuchara" size={24} /></span>
+          <span className="logo-nombre" style={{ color: '#fff' }}>Suma un plato</span>
         </div>
         <nav className="sidebar-nav">
           {MENU.map(item => (
