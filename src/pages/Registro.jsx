@@ -7,7 +7,15 @@ import Footer from '../components/Footer'
 
 export default function Registro() {
   const navigate = useNavigate()
-  const [datos, setDatos] = useState({ nombre: '', email: '', telefono: '', password: '', tipoDonante: 'persona' })
+  const [datos, setDatos] = useState({
+    nombre: '',
+    apellido: '',
+    dni: '',
+    email: '',
+    telefono: '',
+    password: '',
+    tipoDonante: 'persona'
+  })
   const [error, setError] = useState('')
   const [cargando, setCargando] = useState(false)
 
@@ -15,9 +23,20 @@ export default function Registro() {
     setDatos({ ...datos, [campo]: valor })
   }
 
+  // El DNI solo admite números (se descartan puntos, espacios, letras)
+  function cambiarDni(valor) {
+    cambiar('dni', valor.replace(/\D/g, '').slice(0, 8))
+  }
+
   async function enviar(e) {
     e.preventDefault()
     setError('')
+
+    if (datos.dni.length < 7 || datos.dni.length > 8) {
+      setError('El DNI debe tener 7 u 8 números.')
+      return
+    }
+
     setCargando(true)
     try {
       const usuario = await post('/auth/registro', datos)
@@ -38,12 +57,27 @@ export default function Registro() {
         <div style={{ maxWidth: 440, margin: '0 auto' }}>
           <div className="tarjeta tarjeta-pad">
             <h1 className="font-display" style={{ fontSize: 28, margin: '0 0 4px' }}>Sumate como donante</h1>
-            <p style={{ color: 'var(--tinta-suave)', marginTop: 0 }}>Es corto y amable. A los merenderos los da de alta el coordinador.</p>
+            <p style={{ color: 'var(--tinta-suave)', marginTop: 0 }}>Sumate para ayudar a los merenderos.</p>
             {error && <div className="alerta alerta-error">{error}</div>}
             <form onSubmit={enviar}>
               <div style={{ marginBottom: 16 }}>
                 <label className="label-campo">Nombre</label>
                 <input className="campo" value={datos.nombre} onChange={e => cambiar('nombre', e.target.value)} required />
+              </div>
+              <div style={{ marginBottom: 16 }}>
+                <label className="label-campo">Apellido</label>
+                <input className="campo" value={datos.apellido} onChange={e => cambiar('apellido', e.target.value)} required />
+              </div>
+              <div style={{ marginBottom: 16 }}>
+                <label className="label-campo">DNI</label>
+                <input
+                  className="campo"
+                  inputMode="numeric"
+                  placeholder="Sin puntos, ej: 30123456"
+                  value={datos.dni}
+                  onChange={e => cambiarDni(e.target.value)}
+                  required
+                />
               </div>
               <div style={{ marginBottom: 16 }}>
                 <label className="label-campo">Email</label>

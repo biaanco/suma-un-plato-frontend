@@ -25,10 +25,10 @@ export default function Index() {
   }, [hash, key])
 
   const pasos = [
-    { icono: 'bag', titulo: 'Elegís qué donar', texto: 'Mirás las necesidades reales de hoy y armás tu aporte, como un carrito.' },
-    { icono: 'box', titulo: 'Lo llevás al depósito', texto: 'Av. Independencia 450, Laboulaye. Lunes a viernes de 9 a 13 y de 16 a 19 h.' },
-    { icono: 'users', titulo: 'Nosotros lo hacemos llegar', texto: 'Lo registramos, lo cuidamos y lo entregamos al comedor que lo necesita.' }
-  ]
+  { icono: 'comida', titulo: 'Elegís qué donar', texto: 'Mirás las necesidades reales de hoy y armás tu aporte, como un carrito.' },
+  { icono: 'camion', titulo: 'Lo llevás al depósito', texto: 'Av. Independencia 450, Laboulaye. Lunes a viernes de 9 a 13 y de 16 a 19 h.' },
+  { icono: 'entrega', titulo: 'Nosotros lo hacemos llegar', texto: 'Lo registramos, lo cuidamos y lo entregamos al comedor que lo necesita.' }
+]
 
   return (
     <>
