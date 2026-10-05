@@ -1,7 +1,6 @@
 import { usuarioActual } from './auth'
 
-const BASE = 'https://suma-un-plato-backend-docker.onrender.com/api'
-
+const BASE = 'http://localhost:8080/api'
 
 async function pedir(ruta, opciones) {
   const headers = { 'Content-Type': 'application/json' }
