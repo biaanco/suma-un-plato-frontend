@@ -77,7 +77,7 @@ export default function Index() {
 
         <section id="necesidades" className="contenedor seccion">
           <div style={{ marginBottom: 40 }}>
-            <h2 style={{ marginBottom: 8 }}>Necesidades de hoy</h2>
+            <h2 style={{ marginBottom: 8 }}>Los recursos que buscamos</h2>
             <p className="medida" style={{ color: 'var(--tinta-suave)' }}>Datos reales del depósito, en tiempo real. Donás lo que hace falta, no cualquier cosa.</p>
           </div>
           {necesidades.length === 0 ? (
