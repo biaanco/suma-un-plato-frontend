@@ -39,7 +39,7 @@ export default function Footer() {
         </div>
       </div>
       <div style={{ borderTop: '1px solid var(--borde)', padding: '16px 0', textAlign: 'center', color: 'var(--blanco)', fontSize: 12 }}>
-        Las donaciones son de alimentos, no de dinero · Suma un plato
+        Las donaciones no solo son de alimentos. No se aceptan donaciones de dinero · Suma un plato
       </div>
     </footer>
   )
