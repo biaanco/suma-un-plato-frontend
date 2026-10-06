@@ -114,7 +114,7 @@ export default function Index() {
               <p className="font-display" style={{ fontSize: 22 }}>"Antes no sabíamos con qué íbamos a cocinar. Ahora llegamos a la semana tranquilos."</p>
               <footer style={{ color: 'rgba(255,255,255,.6)', marginTop: 12 }}>— Rosa, referente de merendero</footer>
             </blockquote>
-            <p style={{ textAlign: 'center', color: 'rgba(255,255,255,.5)', fontSize: 14, marginTop: 32 }}>Las donaciones son de alimentos, no de dinero.</p>
+            <p style={{ textAlign: 'center', color: 'rgba(255,255,255,.5)', fontSize: 14, marginTop: 32 }}>Las donaciones no son solo de alimentos. No se aceptan donaciones de dinero.</p>
           </div>
         </section>
       </main>
