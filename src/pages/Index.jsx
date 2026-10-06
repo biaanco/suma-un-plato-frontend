@@ -45,7 +45,7 @@ export default function Index() {
               </p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 32 }}>
                 <Link to={usuario ? '/donar' : '/registro'} className="btn-donar">Quiero donar</Link>
-                <a href="#necesidades" className="btn-fantasma">Ver qué se necesita</a>
+                <a href="#necesidades" className="btn-fantasma">Ver qué se recursos necesitamos</a>
               </div>
             </div>
             <div className="hero-imagen reveal">
@@ -81,7 +81,7 @@ export default function Index() {
             <p className="medida" style={{ color: 'var(--tinta-suave)' }}>Datos reales del depósito, en tiempo real. Donás lo que hace falta, no cualquier cosa.</p>
           </div>
           {necesidades.length === 0 ? (
-            <p style={{ color: 'var(--tinta-suave)' }}>Por ahora no hay necesidades publicadas. Volvé pronto.</p>
+            <p style={{ color: 'var(--tinta-suave)' }}>Por ahora no hay recursos publicados. Volvé pronto.</p>
           ) : (
             <div className="grid grid-3">
               {necesidades.map(n => (
