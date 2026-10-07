@@ -412,6 +412,9 @@ main { background: linear-gradient(180deg, #eef5f2 0, #ffffff 640px); }
 
 /* Logo a color arriba del menú lateral del panel.
    El logo tiene fondo blanco, así que esa franja va en blanco para que quede prolijo. */
-.sidebar-top { background: #ffffff; justify-content: center; border-bottom: 3px solid var(--dorado); }
-.sidebar-logo { display: block; line-height: 0; text-decoration: none; }
-.sidebar-logo img { display: block; height: 46px; width: auto; max-width: 100%; }
+/* Franja del logo y barra superior del panel: misma altura y misma línea dorada,
+   así forman una sola banda blanca de punta a punta. */
+.sidebar-top, .panel-top { height: 88px; box-sizing: border-box; background: #ffffff; border-bottom: 3px solid var(--dorado); }
+.sidebar-top { padding: 0 16px; display: flex; align-items: center; justify-content: center; }
+.sidebar-logo { display: block; line-height: 0; text-decoration: none; background: none; padding: 0; border-radius: 0; }
+.sidebar-logo img { display: block; height: 52px; width: auto; max-width: 100%; max-height: none; }
