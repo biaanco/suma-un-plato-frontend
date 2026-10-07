@@ -111,26 +111,13 @@ export default function Merendero() {
             <section className="tarjeta tarjeta-pad">
               <h2 className="font-display" style={{ fontSize: 20, marginTop: 0 }}>Cargar necesidad</h2>
               <form onSubmit={agregar}>
-                <div style={{ marginBottom: 16 }}>
-  <label className="label-campo">Producto</label>
-  <input
-    className="campo"
-    list="lista-productos"
-    value={busqueda}
-    placeholder="Escribí para buscar…"
-    autoComplete="off"
-    required
-    onChange={e => {
-      const texto = e.target.value
-      setBusqueda(texto)
-      const p = alimentos.find(a => a.nombre.toLowerCase() === texto.toLowerCase())
-      setForm({ ...form, alimentoId: p ? p.id : '' })
-    }}
-  />
-  <datalist id="lista-productos">
-    {alimentos.map(a => <option key={a.id} value={a.nombre}>{a.unidad}</option>)}
-  </datalist>
-</div>
+               <div style={{ marginBottom: 16 }}>
+                  <label className="label-campo">Producto</label>
+                  <select className="campo" value={form.alimentoId} onChange={e => setForm({ ...form, alimentoId: e.target.value })} required>
+                    <option value="">Elegí del catálogo…</option>
+                    {alimentos.map(a => <option key={a.id} value={a.id}>{a.nombre} ({a.unidad})</option>)}
+                  </select>
+                </div>
                 <div style={{ marginBottom: 16 }}>
                   <label className="label-campo">Cantidad</label>
                   <input className="campo" type="number" step="0.5" min="0.5" value={form.cantidad} onChange={e => setForm({ ...form, cantidad: e.target.value })} style={{ width: 160 }} required />
