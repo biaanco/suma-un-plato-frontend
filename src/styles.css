@@ -392,3 +392,95 @@ main { background: linear-gradient(180deg, #eef5f2 0, #ffffff 640px); }
   *, *::before, *::after { transition: none !important; }
   .btn-donar:hover, .btn-verde:hover, .tarjeta-hover:hover { transform: none; }
 }
+
+/* =====================================================================
+   PANEL ADMIN EN BLANCO Y NEGRO (estilo simple, básico)
+   Todo lo de abajo solo afecta al panel (.panel)
+   ===================================================================== */
+.panel {
+  --verde: #000000; --verde-hover: #333333; --verde-suave: #eeeeee; --verde-noche: #000000;
+  --dorado: #000000; --dorado-hover: #333333; --dorado-suave: #eeeeee; --dorado-borde: #999999;
+  --naranja: #000000; --naranja-hover: #333333; --naranja-suave: #eeeeee;
+  --tinta: #000000; --tinta-suave: #555555; --borde: #999999; --crema: #f2f2f2;
+  --sem-verde: #000000; --sem-ambar: #555555; --sem-rojo: #000000;
+  --fuente-titulo: 'Times New Roman', Times, serif;
+  --fuente-texto: Arial, Helvetica, sans-serif;
+  --r-sm: 0; --r-md: 0; --sombra: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  color: #000000;
+  background: #ffffff;
+}
+.panel h1, .panel h2, .panel h3, .panel .font-display, .panel .kpi-num {
+  font-family: 'Times New Roman', Times, serif; font-weight: bold; letter-spacing: 0;
+}
+.panel a { color: #000000; text-decoration: underline; }
+.panel a:hover { color: #555555; }
+
+/* barra lateral */
+.panel .sidebar { background: #ffffff; color: #000000; border-right: 2px solid #000000; }
+.panel .sidebar-top { height: auto; padding: 10px; border-bottom: 2px solid #000000; justify-content: center; }
+.panel .sidebar-logo { display: block; text-decoration: none; }
+.panel .sidebar-logo img { display: block; width: 100%; max-width: 220px; height: auto; filter: grayscale(1) contrast(1.3); }
+.panel .sidebar-nav { padding: 10px; gap: 4px; }
+.panel .sidebar-link { color: #000000; font-size: 15px; border-radius: 0; text-decoration: underline; }
+.panel .sidebar-link:hover { background: #dddddd; color: #000000; }
+.panel .sidebar-link.activo { background: #000000; color: #ffffff; box-shadow: none; font-weight: bold; }
+.panel .sidebar-badge { background: #ffffff; color: #000000; border: 1px solid #000000; border-radius: 0; }
+.panel .sidebar-bottom { border-top: 2px solid #000000; }
+
+/* parte principal */
+.panel .panel-main { background: #ffffff; }
+.panel .panel-top { border-bottom: 2px solid #000000; background: #ffffff; }
+.panel .panel-top h1 { color: #000000; font-size: 28px; text-decoration: underline; }
+
+/* cajas */
+.panel .tarjeta, .panel .kpi { border: 2px solid #000000; border-radius: 0; box-shadow: none; background: #ffffff; }
+.panel .tarjeta-hover:hover { transform: none; border-color: #000000; box-shadow: none; }
+.panel .kpi-num { color: #000000; }
+.panel .grid { gap: 16px; }
+
+/* botones */
+.panel .btn-donar, .panel .btn-verde, .panel .btn-fantasma, .panel .btn-icono, .panel .icon-boton {
+  border-radius: 0; box-shadow: none; transform: none; border: 2px solid #000000; padding: 6px 14px; font-weight: bold;
+}
+.panel .btn-donar, .panel .btn-verde { background: #000000; color: #ffffff; }
+.panel .btn-donar:hover, .panel .btn-verde:hover { background: #444444; color: #ffffff; transform: none; }
+.panel .btn-fantasma, .panel .btn-icono, .panel .icon-boton { background: #dddddd; color: #000000; }
+.panel .btn-fantasma:hover, .panel .btn-icono:hover, .panel .icon-boton:hover { background: #bbbbbb; color: #000000; }
+
+/* chips y semáforo */
+.panel .chip { border-radius: 0; border: 1px solid #000000; background: #ffffff; color: #000000; }
+.panel .chip-urgente { background: #000000; color: #ffffff; }
+.panel .chip-suave, .panel .chip-verde, .panel .chip-gris { background: #eeeeee; color: #000000; }
+.panel .punto { border: 1px solid #000000; border-radius: 0; }
+.panel .punto-verde { background: #ffffff; }
+.panel .punto-ambar { background: #888888; }
+.panel .punto-rojo { background: #000000; }
+.panel .punto-neutro { background: #dddddd; }
+
+/* progreso */
+.panel .progreso-riel { background: #ffffff; border: 1px solid #000000; border-radius: 0; height: 12px; }
+.panel .progreso-relleno { background: #000000; border-radius: 0; }
+
+/* tablas */
+.panel .tabla { border: 1px solid #000000; }
+.panel .tabla th { color: #000000; background: #dddddd; border: 1px solid #000000; }
+.panel .tabla td { border: 1px solid #000000; }
+.panel .tabla tbody tr:hover { background: #f2f2f2; }
+
+/* formularios */
+.panel .campo { border: 1px solid #000000; border-radius: 0; font-size: 15px; padding: 6px 8px; }
+.panel .campo:focus { box-shadow: none; outline: 2px solid #000000; }
+.panel .label-campo { color: #000000; }
+.panel .pildora span { border-radius: 0; border-color: #000000; }
+.panel .pildora input:checked + span { background: #000000; color: #ffffff; }
+
+/* avisos */
+.panel .alerta { border: 2px solid #000000; border-radius: 0; background: #ffffff; color: #000000; }
+.panel .alerta-ok, .panel .alerta-info { background: #eeeeee; }
+.panel .alerta-error { background: #ffffff; border-style: dashed; }
+.panel .cargando { border-top-color: #000000; }
+
+/* cualquier color suelto del contenido pasa a gris */
+.panel .panel-contenido { filter: grayscale(1); }
