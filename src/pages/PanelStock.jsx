@@ -41,7 +41,7 @@ export default function PanelStock() {
   return (
     <PanelLayout titulo="Stock del depósito" seccion="stock">
       <p className="medida" style={{ color: 'var(--tinta-suave)', marginBottom: 24 }}>
-        El inventario vivo, lote por lote. Filtrá por categoría o buscá un alimento. Si hubo un error de conteo, corregí un lote acá mismo y queda registrado el ajuste.
+        El inventario vivo, lote por lote. Filtrá por categoría o buscá un producto. Si hubo un error de conteo, corregí un lote acá mismo y queda registrado el ajuste.
       </p>
 
       <form onSubmit={filtrar} style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'flex-end', marginBottom: 24 }}>
@@ -63,7 +63,7 @@ export default function PanelStock() {
 
       <div className="tarjeta tabla-scroll">
         <table className="tabla">
-          <thead><tr><th>Alimento</th><th>Lote</th><th>Cantidad</th><th>Origen</th><th>Vencimiento</th><th>Estado</th><th></th></tr></thead>
+          <thead><tr><th>Producto</th><th>Lote</th><th>Cantidad</th><th>Origen</th><th>Vencimiento</th><th>Estado</th><th></th></tr></thead>
           <tbody>
             {lotes.length === 0 ? (
               <tr><td colSpan="7" style={{ textAlign: 'center', color: 'var(--tinta-suave)', padding: 32 }}>No hay lotes que coincidan.</td></tr>
