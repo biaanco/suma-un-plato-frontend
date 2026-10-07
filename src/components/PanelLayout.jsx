@@ -68,15 +68,13 @@ export default function PanelLayout({ titulo, seccion, children }) {
         </nav>
         <div className="sidebar-bottom">
           <Link to="/" className="sidebar-link">Ver sitio público</Link>
-          
+          <button className="sidebar-link" style={{ width: '100%', textAlign: 'left', background: 'none', border: 'none' }} onClick={salir}>Cerrar sesión</button>
         </div>
       </aside>
 
       <div className="panel-main">
         <div className="panel-top">
-          <button className="icon-boton" style={{ display: 'inline-flex' }} aria-label="Abrir menú" onClick={() => setAbierto(true)}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
-          </button>
+          
           <h1>{titulo}</h1>
           <span style={{ marginLeft: 'auto', color: 'var(--tinta-suave)', fontSize: 14 }}>Hola, {usuario.nombre}</span>
         </div>
