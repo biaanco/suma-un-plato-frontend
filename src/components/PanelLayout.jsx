@@ -68,7 +68,7 @@ export default function PanelLayout({ titulo, seccion, children }) {
         </nav>
         <div className="sidebar-bottom">
           <Link to="/" className="sidebar-link">Ver sitio público</Link>
-          <button className="sidebar-link" style={{ width: '100%', textAlign: 'left', background: 'none', border: 'none' }} onClick={salir}>Cerrar sesión</button>
+          
         </div>
       </aside>
 
