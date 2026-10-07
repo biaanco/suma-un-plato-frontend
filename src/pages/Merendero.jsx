@@ -111,7 +111,7 @@ export default function Merendero() {
               <h2 className="font-display" style={{ fontSize: 20, marginTop: 0 }}>Cargar necesidad</h2>
               <form onSubmit={agregar}>
                 <div style={{ marginBottom: 16 }}>
-                  <label className="label-campo">Productos</label>
+                  <label className="label-campo">Producto</label>
                   <select className="campo" value={form.alimentoId} onChange={e => setForm({ ...form, alimentoId: e.target.value })} required>
                     <option value="">Elegí del catálogo…</option>
                     {alimentos.map(a => <option key={a.id} value={a.id}>{a.nombre} ({a.unidad})</option>)}
@@ -143,7 +143,7 @@ export default function Merendero() {
               ) : (
                 <div className="tarjeta tabla-scroll">
                   <table className="tabla">
-                    <thead><tr><th>Alimento</th><th>Cantidad</th><th>Urgencia</th><th>Estado</th><th></th></tr></thead>
+                    <thead><tr><th>Producto</th><th>Cantidad</th><th>Urgencia</th><th>Estado</th><th></th></tr></thead>
                     <tbody>
                       {planilla.map(p => (
                         <tr key={p.id}>
