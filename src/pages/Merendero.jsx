@@ -7,7 +7,6 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Icono from '../components/Icono'
 
-const [busqueda, setBusqueda] = useState('')
 
 const URG = {
   alta: { background: '#000000', color: '#ffffff' },
