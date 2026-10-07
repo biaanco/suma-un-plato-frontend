@@ -265,7 +265,24 @@ button:disabled { opacity: .5; cursor: default; }
 }
 .sidebar.abierto { transform: translateX(0); }
 @media (min-width: 768px) { .sidebar { position: sticky; transform: none; } }
-.sidebar-top { height: 72px; display: flex; align-items: center; gap: 8px; padding: 0 16px; border-bottom: 1px solid rgba(255, 255, 255, .15); }
+.sidebar-logo {
+  display: block;
+  background: #fff;
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+
+.sidebar-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 56px;
+  object-fit: contain;
+}
+
+.sidebar-top {
+  padding: 20px 16px;
+}
 .sidebar-nav { flex: 1; overflow-y: auto; padding: 12px 8px; display: flex; flex-direction: column; gap: 2px; }
 .sidebar-link {
   display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: var(--r-sm);
