@@ -52,9 +52,9 @@ export default function PanelPublicar() {
           <h2 className="font-display" style={{ fontSize: 20, marginTop: 0 }}>Publicar / actualizar</h2>
           <form onSubmit={publicar}>
             <div style={{ marginBottom: 16 }}>
-              <label className="label-campo">Alimento</label>
+              <label className="label-campo">Producto</label>
               <select className="campo" value={alimentoId} onChange={e => setAlimentoId(e.target.value)} required>
-                <option value="">Elegí un alimento…</option>
+                <option value="">Elegí un producto…</option>
                 {alimentos.map(a => <option key={a.id} value={a.id}>{a.nombre} ({a.unidad})</option>)}
               </select>
             </div>
