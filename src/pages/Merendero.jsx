@@ -6,7 +6,7 @@ import { cant, fecha } from '../format'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Icono from '../components/Icono'
-
+import SelectorBuscable from '../components/SelectorBuscable'
 
 const URG = {
   alta: { background: '#000000', color: '#ffffff' },
@@ -56,7 +56,8 @@ export default function Merendero() {
 
   async function agregar(e) {
     e.preventDefault()
-    if (!form.alimentoId || !form.cantidad) return
+    if (!form.alimentoId) { setMensaje(''); alert('Elegí un producto del catálogo.'); return }
+if (!form.cantidad) return
     await post('/merenderos/' + merendero.id + '/planilla', { alimentoId: Number(form.alimentoId), cantidad: Number(form.cantidad), urgencia: form.urgencia })
     setForm({ alimentoId: '', cantidad: '', urgencia: 'media' })
     setMensaje('Necesidad agregada a tu planilla.')
@@ -111,12 +112,16 @@ export default function Merendero() {
             <section className="tarjeta tarjeta-pad">
               <h2 className="font-display" style={{ fontSize: 20, marginTop: 0 }}>Cargar necesidad</h2>
               <form onSubmit={agregar}>
-               <div style={{ marginBottom: 16 }}>
-                  <label className="label-campo">Producto</label>
-                  <select className="campo" value={form.alimentoId} onChange={e => setForm({ ...form, alimentoId: e.target.value })} required>
-                    <option value="">Elegí del catálogo…</option>
-                    {alimentos.map(a => <option key={a.id} value={a.id}>{a.nombre} ({a.unidad})</option>)}
-                  </select>
+                <div style={{ marginBottom: 16 }}>
+                  <label className="label-campo">Alimento</label>
+                  <div style={{ marginBottom: 16 }}>
+  <label className="label-campo">Producto</label>
+  <SelectorBuscable
+    opciones={alimentos}
+    valor={form.alimentoId}
+    onChange={id => setForm({ ...form, alimentoId: id })}
+  />
+</div>
                 </div>
                 <div style={{ marginBottom: 16 }}>
                   <label className="label-campo">Cantidad</label>
@@ -144,7 +149,7 @@ export default function Merendero() {
               ) : (
                 <div className="tarjeta tabla-scroll">
                   <table className="tabla">
-                    <thead><tr><th>Producto</th><th>Cantidad</th><th>Urgencia</th><th>Estado</th><th></th></tr></thead>
+                    <thead><tr><th>Alimento</th><th>Cantidad</th><th>Urgencia</th><th>Estado</th><th></th></tr></thead>
                     <tbody>
                       {planilla.map(p => (
                         <tr key={p.id}>
