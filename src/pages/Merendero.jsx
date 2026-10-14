@@ -113,7 +113,7 @@ if (!form.cantidad) return
               <h2 className="font-display" style={{ fontSize: 20, marginTop: 0 }}>Cargar necesidad</h2>
               <form onSubmit={agregar}>
                 <div style={{ marginBottom: 16 }}>
-                  <label className="label-campo">Alimento</label>
+                  <label className="label-campo">Producto</label>
                   <div style={{ marginBottom: 16 }}>
   <label className="label-campo">Producto</label>
   <SelectorBuscable
@@ -149,7 +149,7 @@ if (!form.cantidad) return
               ) : (
                 <div className="tarjeta tabla-scroll">
                   <table className="tabla">
-                    <thead><tr><th>Alimento</th><th>Cantidad</th><th>Urgencia</th><th>Estado</th><th></th></tr></thead>
+                    <thead><tr><th>Producto</th><th>Cantidad</th><th>Urgencia</th><th>Estado</th><th></th></tr></thead>
                     <tbody>
                       {planilla.map(p => (
                         <tr key={p.id}>
