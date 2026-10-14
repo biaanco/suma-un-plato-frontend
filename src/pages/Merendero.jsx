@@ -115,7 +115,7 @@ if (!form.cantidad) return
                 <div style={{ marginBottom: 16 }}>
                   <label className="label-campo">Producto</label>
                   <div style={{ marginBottom: 16 }}>
-  <label className="label-campo">Producto</label>
+  
   <SelectorBuscable
     opciones={alimentos}
     valor={form.alimentoId}
