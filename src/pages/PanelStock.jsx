@@ -11,17 +11,21 @@ export default function PanelStock() {
   const [cat, setCat] = useState('')
   const [q, setQ] = useState('')
   const [ajustes, setAjustes] = useState({})
+  const [cargando, setCargando] = useState(true)
 
   function cargar() {
     const params = new URLSearchParams()
     if (cat) params.set('cat', cat)
     if (q) params.set('q', q)
-    get('/panel/stock?' + params.toString()).then(l => {
-      setLotes(l)
-      const inicial = {}
-      l.forEach(x => { inicial[x.id] = x.cantidad })
-      setAjustes(inicial)
-    }).catch(() => {})
+    get('/panel/stock?' + params.toString())
+      .then(l => {
+        setLotes(l)
+        const inicial = {}
+        l.forEach(x => { inicial[x.id] = x.cantidad })
+        setAjustes(inicial)
+      })
+      .catch(() => {})
+      .finally(() => setCargando(false))
   }
 
   useEffect(() => { cargar() }, [])
@@ -58,34 +62,40 @@ export default function PanelStock() {
           </select>
         </div>
         <button className="btn-fantasma">Filtrar</button>
-        <span style={{ marginLeft: 'auto', fontSize: 14, color: 'var(--tinta-suave)' }}>Total mostrado: <strong className="tabular">{cant(total)}</strong></span>
+        {!cargando && (
+          <span style={{ marginLeft: 'auto', fontSize: 14, color: 'var(--tinta-suave)' }}>Total mostrado: <strong className="tabular">{cant(total)}</strong></span>
+        )}
       </form>
 
-      <div className="tarjeta tabla-scroll">
-        <table className="tabla">
-          <thead><tr><th>Producto</th><th>Lote</th><th>Cantidad</th><th>Origen</th><th>Vencimiento</th><th>Estado</th><th></th></tr></thead>
-          <tbody>
-            {lotes.length === 0 ? (
-              <tr><td colSpan="7" style={{ textAlign: 'center', color: 'var(--tinta-suave)', padding: 32 }}>No hay lotes que coincidan.</td></tr>
-            ) : lotes.map(l => (
-              <tr key={l.id}>
-                <td><div style={{ display: 'flex', alignItems: 'center', gap: 8 }}><span style={{ color: 'var(--naranja-hover)' }}><Icono nombre={l.icono} size={20} /></span><span style={{ fontWeight: 500 }}>{l.nombre}</span></div></td>
-                <td style={{ color: 'var(--tinta-suave)' }}>#{l.id}</td>
-                <td className="tabular" style={{ fontWeight: 500 }}>{cant(l.cantidad)} {l.unidad}</td>
-                <td style={{ color: 'var(--tinta-suave)', fontSize: 14 }}>{l.origen ? 'Donación #' + l.origen : 'Carga directa'}</td>
-                <td className="tabular">{l.vencimiento ? fecha(l.vencimiento) : '—'}</td>
-                <td><span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 14, fontWeight: 500, color: colorSemaforo(l.semaforo.clase) }}><span className={claseSemaforo(l.semaforo.clase)}></span>{l.semaforo.texto}</span></td>
-                <td>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                    <input type="number" min="0" step="0.5" value={ajustes[l.id] ?? l.cantidad} onChange={e => setAjustes({ ...ajustes, [l.id]: e.target.value })} className="campo tabular" style={{ width: 80, padding: '4px 8px' }} />
-                    <button className="btn-fantasma" style={{ padding: '6px 12px', minHeight: 'auto' }} onClick={() => ajustar(l.id)}>Ajustar</button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {cargando ? (
+        <span className="cargando"></span>
+      ) : (
+        <div className="tarjeta tabla-scroll">
+          <table className="tabla">
+            <thead><tr><th>Producto</th><th>Lote</th><th>Cantidad</th><th>Origen</th><th>Vencimiento</th><th>Estado</th><th></th></tr></thead>
+            <tbody>
+              {lotes.length === 0 ? (
+                <tr><td colSpan="7" style={{ textAlign: 'center', color: 'var(--tinta-suave)', padding: 32 }}>No hay lotes que coincidan.</td></tr>
+              ) : lotes.map(l => (
+                <tr key={l.id}>
+                  <td><div style={{ display: 'flex', alignItems: 'center', gap: 8 }}><span style={{ color: 'var(--naranja-hover)' }}><Icono nombre={l.icono} size={20} /></span><span style={{ fontWeight: 500 }}>{l.nombre}</span></div></td>
+                  <td style={{ color: 'var(--tinta-suave)' }}>#{l.id}</td>
+                  <td className="tabular" style={{ fontWeight: 500 }}>{cant(l.cantidad)} {l.unidad}</td>
+                  <td style={{ color: 'var(--tinta-suave)', fontSize: 14 }}>{l.origen ? 'Donación #' + l.origen : 'Carga directa'}</td>
+                  <td className="tabular">{l.vencimiento ? fecha(l.vencimiento) : '—'}</td>
+                  <td><span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 14, fontWeight: 500, color: colorSemaforo(l.semaforo.clase) }}><span className={claseSemaforo(l.semaforo.clase)}></span>{l.semaforo.texto}</span></td>
+                  <td>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                      <input type="number" min="0" step="0.5" value={ajustes[l.id] ?? l.cantidad} onChange={e => setAjustes({ ...ajustes, [l.id]: e.target.value })} className="campo tabular" style={{ width: 80, padding: '4px 8px' }} />
+                      <button className="btn-fantasma" style={{ padding: '6px 12px', minHeight: 'auto' }} onClick={() => ajustar(l.id)}>Ajustar</button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </PanelLayout>
   )
 }
