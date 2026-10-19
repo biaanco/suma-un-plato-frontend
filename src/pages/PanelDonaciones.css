@@ -1,0 +1,151 @@
+/* ---------- Tokens de animación ---------- */
+:root {
+  --ease-suave: cubic-bezier(0.22, 0.8, 0.24, 1);
+  --esq-base: color-mix(in srgb, var(--tinta-suave, #8a8a8a) 12%, transparent);
+  --esq-brillo: color-mix(in srgb, var(--tinta-suave, #8a8a8a) 24%, transparent);
+}
+
+/* ---------- Esqueleto de carga ---------- */
+.esq-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.esq-estado {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--tinta-suave);
+  animation: aparecer 0.4s var(--ease-suave) both;
+}
+
+.esq-punto {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--naranja-hover, currentColor);
+}
+.esq-punto::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: inherit;
+  animation: latido 1.4s var(--ease-suave) infinite;
+}
+
+.esq-tarjeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  animation: entrar 0.5s var(--ease-suave) both;
+  animation-delay: calc(var(--i, 0) * 80ms);
+}
+
+.esq-textos {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Brillo que recorre todas las piezas sincronizado (background-attachment: fixed) */
+.esq {
+  background: linear-gradient(100deg, var(--esq-base) 30%, var(--esq-brillo) 50%, var(--esq-base) 70%);
+  background-size: 200vw 100%;
+  background-attachment: fixed;
+  animation: brillo 1.6s linear infinite;
+}
+.esq-circulo { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; }
+.esq-linea { height: 14px; border-radius: 6px; }
+.esq-linea-chica { height: 11px; }
+.esq-chip { width: 84px; height: 24px; border-radius: 999px; flex-shrink: 0; }
+
+/* ---------- Lista real ---------- */
+.lista-donaciones {
+  display: flex;
+  flex-direction: column;
+}
+
+/* El separador vive dentro del ítem para que colapse junto con él */
+.donacion-item {
+  display: grid;
+  grid-template-rows: 1fr;
+  animation: entrar 0.5s var(--ease-suave) both;
+  animation-delay: calc(var(--i, 0) * 60ms);
+  transition:
+    grid-template-rows 0.42s var(--ease-suave),
+    opacity 0.28s ease,
+    transform 0.42s var(--ease-suave);
+}
+.donacion-item-interior {
+  min-height: 0;
+  padding-bottom: 20px;
+}
+.donacion-item:last-child .donacion-item-interior { padding-bottom: 0; }
+
+.donacion-item[data-saliendo] {
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: scale(0.98) translateY(-6px);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.vacio-donaciones {
+  text-align: center;
+  color: var(--tinta-suave);
+}
+
+.aparecer { animation: aparecer 0.4s var(--ease-suave) both; }
+
+.btn-link-reintentar {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  font-weight: 600;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.btn-link-reintentar:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes brillo {
+  from { background-position: 100vw 0; }
+  to   { background-position: -100vw 0; }
+}
+@keyframes entrar {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes latido {
+  0%   { transform: scale(1);   opacity: 0.6; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* ---------- Movimiento reducido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .esq,
+  .esq-punto::after { animation: none; }
+  .esq-tarjeta,
+  .donacion-item,
+  .aparecer,
+  .esq-estado { animation-duration: 0.01ms; animation-delay: 0ms; }
+  .donacion-item { transition-duration: 0.01ms; }
+}
