@@ -3,7 +3,10 @@ import { useState, useRef, useEffect } from 'react'
 // Quita tildes y pasa a minúsculas para comparar
 const normalizar = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
 
-export default function SelectorBuscable({ opciones, valor, onChange, placeholder = 'Elegí del catálogo…' }) {
+// Opción extra para pedir algo que no está en el catálogo
+const OTROS = { id: 'otros', nombre: 'Otros' }
+
+export default function SelectorBuscable({ opciones, valor, onChange, placeholder = 'Elegí del catálogo…', conOtros = false }) {
   const [abierto, setAbierto] = useState(false)
   const [texto, setTexto] = useState('')
   const [resaltado, setResaltado] = useState(0)
@@ -11,12 +14,13 @@ export default function SelectorBuscable({ opciones, valor, onChange, placeholde
   const buscador = useRef(null)
   const lista = useRef(null)
 
-  const etiqueta = a => `${a.nombre} (${a.unidad})`
-  const seleccionado = opciones.find(a => String(a.id) === String(valor))
+  const etiqueta = a => a === OTROS ? 'Otros (no está en la lista)' : `${a.nombre} (${a.unidad})`
+  const seleccionado = valor === OTROS.id ? OTROS : opciones.find(a => String(a.id) === String(valor))
 
   // Solo los que empiezan con lo escrito
   const t = normalizar(texto.trim())
   const filtradas = opciones.filter(a => normalizar(a.nombre).startsWith(t))
+  if (conOtros) filtradas.push(OTROS)
 
   // Cerrar al hacer clic afuera
   useEffect(() => {
@@ -91,7 +95,7 @@ export default function SelectorBuscable({ opciones, valor, onChange, placeholde
                   color: i === resaltado ? '#ffffff' : 'inherit'
                 }}
               >
-                {etiqueta(a)}
+                {a === OTROS ? <em>{etiqueta(a)}</em> : etiqueta(a)}
               </li>
             ))}
           </ul>

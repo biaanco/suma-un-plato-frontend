@@ -14,6 +14,8 @@ const URG = {
   baja: { background: '#ffffff', color: '#000000' }
 }
 const ESTADO = { pendiente: 'Pendiente', parcial: 'Parcial', cubierta: 'Cubierta' }
+const UNIDADES = ['u', 'kg', 'L', 'paq']
+const FORM_VACIO = { alimentoId: '', otroNombre: '', otraUnidad: 'u', cantidad: '', urgencia: 'media' }
 
 export default function Merendero() {
   const usuario = usuarioActual()
@@ -23,7 +25,7 @@ export default function Merendero() {
   const [alimentos, setAlimentos] = useState([])
   const [planilla, setPlanilla] = useState([])
   const [entregas, setEntregas] = useState([])
-  const [form, setForm] = useState({ alimentoId: '', cantidad: '', urgencia: 'media' })
+  const [form, setForm] = useState(FORM_VACIO)
   const [mensaje, setMensaje] = useState('')
 
   useEffect(() => {
@@ -56,11 +58,18 @@ export default function Merendero() {
 
   async function agregar(e) {
     e.preventDefault()
+    const esOtro = form.alimentoId === 'otros'
     if (!form.alimentoId) { setMensaje(''); alert('Elegí un producto del catálogo.'); return }
-if (!form.cantidad) return
-    await post('/merenderos/' + merendero.id + '/planilla', { alimentoId: Number(form.alimentoId), cantidad: Number(form.cantidad), urgencia: form.urgencia })
-    setForm({ alimentoId: '', cantidad: '', urgencia: 'media' })
-    setMensaje('Necesidad agregada a tu planilla.')
+    if (esOtro && !form.otroNombre.trim()) { setMensaje(''); alert('Escribí qué producto necesitás.'); return }
+    if (!form.cantidad) return
+    const producto = esOtro
+      ? { otroNombre: form.otroNombre.trim(), otraUnidad: form.otraUnidad }
+      : { alimentoId: Number(form.alimentoId) }
+    await post('/merenderos/' + merendero.id + '/planilla', { ...producto, cantidad: Number(form.cantidad), urgencia: form.urgencia })
+    setForm(FORM_VACIO)
+    setMensaje(esOtro
+      ? 'Necesidad agregada. El coordinador va a revisar el producto nuevo para sumarlo al catálogo.'
+      : 'Necesidad agregada a tu planilla.')
     cargar(merendero.id)
   }
 
@@ -113,15 +122,23 @@ if (!form.cantidad) return
               <h2 className="font-display" style={{ fontSize: 20, marginTop: 0 }}>Cargar necesidad</h2>
               <form onSubmit={agregar}>
                 <div style={{ marginBottom: 16 }}>
-                  <label className="label-campo">Producto</label>
                   <div style={{ marginBottom: 16 }}>
-  
+  <label className="label-campo">Producto</label>
   <SelectorBuscable
     opciones={alimentos}
     valor={form.alimentoId}
     onChange={id => setForm({ ...form, alimentoId: id })}
+    conOtros
   />
 </div>
+                  {form.alimentoId === 'otros' && (
+                    <div style={{ display: 'flex', gap: 8 }}>
+                      <input className="campo" value={form.otroNombre} onChange={e => setForm({ ...form, otroNombre: e.target.value })} placeholder="¿Qué producto necesitás?" maxLength={60} autoFocus required />
+                      <select className="campo" value={form.otraUnidad} onChange={e => setForm({ ...form, otraUnidad: e.target.value })} style={{ width: 90 }} aria-label="Unidad">
+                        {UNIDADES.map(u => <option key={u} value={u}>{u}</option>)}
+                      </select>
+                    </div>
+                  )}
                 </div>
                 <div style={{ marginBottom: 16 }}>
                   <label className="label-campo">Cantidad</label>
@@ -153,7 +170,7 @@ if (!form.cantidad) return
                     <tbody>
                       {planilla.map(p => (
                         <tr key={p.id}>
-                          <td><div style={{ display: 'flex', alignItems: 'center', gap: 8 }}><span style={{ color: 'var(--naranja-hover)' }}><Icono nombre={p.icono} size={20} /></span><span style={{ fontWeight: 500 }}>{p.nombre}</span></div></td>
+                          <td><div style={{ display: 'flex', alignItems: 'center', gap: 8 }}><span style={{ color: 'var(--naranja-hover)' }}><Icono nombre={p.icono} size={20} /></span><span style={{ fontWeight: 500 }}>{p.nombre}</span>{p.pendiente && <span className="chip chip-gris" title="El coordinador todavía no lo sumó al catálogo">en revisión</span>}</div></td>
                           <td className="tabular">{cant(p.cantidad)} {p.unidad}</td>
                           <td><span className="chip" style={URG[p.urgencia]}>{p.urgencia}</span></td>
                           <td style={{ fontSize: 14, color: 'var(--tinta-suave)' }}>{ESTADO[p.estado]}</td>

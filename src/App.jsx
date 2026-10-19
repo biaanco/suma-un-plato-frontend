@@ -11,6 +11,7 @@ import Panel from './pages/Panel'
 import PanelDonaciones from './pages/PanelDonaciones'
 import PanelStock from './pages/PanelStock'
 import PanelPlanillas from './pages/PanelPlanillas'
+import PanelSugeridos from './pages/PanelSugeridos'
 import PanelPublicar from './pages/PanelPublicar'
 import PanelEntrega from './pages/PanelEntrega'
 import PanelMerenderos from './pages/PanelMerenderos'
@@ -31,6 +32,7 @@ export default function App() {
       <Route path="/panel/revisar" element={<PanelDonaciones />} />
       <Route path="/panel/stock" element={<PanelStock />} />
       <Route path="/panel/planillas" element={<PanelPlanillas />} />
+      <Route path="/panel/sugeridos" element={<PanelSugeridos />} />
       <Route path="/panel/publicar" element={<PanelPublicar />} />
       <Route path="/panel/entrega" element={<PanelEntrega />} />
       <Route path="/panel/merenderos" element={<PanelMerenderos />} />
