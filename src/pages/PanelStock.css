@@ -1,0 +1,54 @@
+/* Requiere PanelDonaciones.css (tokens --ease-suave, .esq, .esq-linea, .esq-punto, keyframes) */
+
+.stock-resumen {
+  margin-left: auto;
+  min-height: 24px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: var(--tinta-suave);
+}
+
+/* ---------- Filas esqueleto ---------- */
+.esq-fila {
+  animation: entrar 0.5s var(--ease-suave) both;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+.esq-celda-producto {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.esq-icono { width: 20px; height: 20px; border-radius: 6px; flex-shrink: 0; }
+.esq-semaforo { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.esq-input { width: 80px; height: 30px; border-radius: 8px; flex-shrink: 0; }
+.esq-boton { width: 64px; height: 30px; border-radius: 8px; flex-shrink: 0; }
+
+/* ---------- Filas reales ---------- */
+.fila-entrar {
+  animation: entrar 0.45s var(--ease-suave) both;
+  animation-delay: calc(var(--i, 0) * 35ms);
+}
+
+.fila-ajustada > td {
+  animation: destello 1.2s ease-out;
+}
+
+.btn-ajustar {
+  transition: opacity 0.2s ease;
+}
+.btn-ajustar:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+@keyframes destello {
+  0%   { background-color: color-mix(in srgb, var(--naranja-hover, #e8a33d) 20%, transparent); }
+  100% { background-color: transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .esq-fila,
+  .fila-entrar { animation-duration: 0.01ms; animation-delay: 0ms; }
+  .fila-ajustada > td { animation: none; }
+}
