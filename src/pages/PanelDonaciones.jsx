@@ -54,7 +54,7 @@ function TarjetaDonacion({ donacion, usuarioId, onConfirmado }) {
         {error && <div className="alerta alerta-error">{error}</div>}
         <div className="tabla-scroll">
           <table className="tabla">
-            <thead><tr><th>Alimento</th><th>Declarado</th><th>Cantidad real</th><th>Vencimiento</th></tr></thead>
+            <thead><tr><th>Producto</th><th>Declarado</th><th>Cantidad real</th><th>Vencimiento</th></tr></thead>
             <tbody>
               {items.map((it, i) => (
                 <tr key={i}>
