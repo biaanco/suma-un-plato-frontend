@@ -34,7 +34,7 @@ export default function PanelPlanillas() {
         <>
           <section className="tarjeta tarjeta-pad" style={{ marginBottom: 32 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-              <h2 className="font-display" style={{ fontSize: 20, margin: 0 }}>Total pedido por alimento</h2>
+              <h2 className="font-display" style={{ fontSize: 20, margin: 0 }}>Total pedido por producto</h2>
               <Link to="/panel/publicar" className="btn-donar" style={{ padding: '8px 16px' }}>Publicar necesidades</Link>
             </div>
             {datos.agregado.length === 0 ? (
@@ -67,7 +67,7 @@ export default function PanelPlanillas() {
                 ) : (
                   <div className="tabla-scroll">
                     <table className="tabla">
-                      <thead><tr><th>Alimento</th><th>Cantidad</th><th>Urgencia</th><th>Estado</th></tr></thead>
+                      <thead><tr><th>Producto</th><th>Cantidad</th><th>Urgencia</th><th>Estado</th></tr></thead>
                       <tbody>
                         {m.items.map((p, j) => (
                           <tr key={j}>
